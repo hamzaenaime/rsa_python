@@ -1,6 +1,6 @@
 import math
 import random
-
+import sys
 
 # array of primes numbers
 
@@ -65,6 +65,13 @@ def get_e(phy):
         return e
 
 
+def get_ascii(message):
+    ascii_ = list()
+    for i in range(0, len(message)):
+        ascii_.append(ord(message[i]))
+    return ascii_
+
+
 values = get_phy_n()
 phy_n = values[0]
 n = values[1]
@@ -73,9 +80,36 @@ d = get_d(e, phy_n)
 
 # public key (n,e)
 # private ke (n,d)
-msg = int(75)
-print("message is : ", msg)
-cry = int((msg ** e) % n)
-print("message crypred is : ", cry)
-decry = int((cry ** d) % n)
-print("message decrypred is : ", decry)
+# msg = int(75)
+# print("message is : ", msg)
+# cry = int((msg ** e) % n)
+# print("message crypred is : ", cry)
+# decry = int((cry ** d) % n)
+# print("message decrypred is : ", decry)
+
+message = raw_input("Enter Your Message : ")
+
+
+def crypter(code_ascii, n, e):
+    crypted = list()
+    for i in range(0, len(code_ascii)):
+        cry = int((code_ascii[i] ** e) % n)
+        crypted.append(cry)
+    print("cryptage end")
+    return crypted
+
+
+def decrypter(crypt, n, d):
+    decrypt = list()
+    for i in range(0, len(crypt)):
+        decry = int((crypt[i] ** d) % n)
+        decrypt.append(chr(decry))
+    print("decryptage end")
+    return decrypt
+
+
+ascii_ = get_ascii(message)
+crypt = crypter(ascii_, n, e)
+decrypt = decrypter(crypt, n, d)
+for c in range(0, len(decrypt)):
+    print(decrypt[c])
