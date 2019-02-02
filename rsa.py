@@ -2,13 +2,14 @@ import math
 import random
 import sys
 
-# array of primes numbers
 
-
+# pgcd method
 def gcd(a, b):
     while b:
         a, b = b, a % b
     return a
+
+# test if a number is prime or not
 
 
 def is_prime(n):
@@ -23,6 +24,8 @@ def is_prime(n):
     else:
         print("nombre invalide")
 
+# get all the prime numbers under 100
+
 
 def get_primes():
     primes = list()
@@ -31,10 +34,14 @@ def get_primes():
             primes.append(i)
     return primes
 
+# generate a random prime number under 100
+
 
 def get_random_prime():
     r = random.randint(0, len(get_primes()))
     return get_primes()[r]
+
+# calcluate n and phy
 
 
 def get_phy_n():
@@ -48,11 +55,14 @@ def get_phy_n():
     return [phy, n]
 
 
+# calculate d
 def get_d(e,  phy):
     e = e % phy
     for d in range(1, phy):
         if (e*d) % phy == 1:
             return d
+
+# calculate e
 
 
 def get_e(phy):
@@ -64,6 +74,8 @@ def get_e(phy):
             g = gcd(phy, e)
         return e
 
+# convert a string into array of ascii values for each caractere of that string
+
 
 def get_ascii(message):
     ascii_ = list()
@@ -71,23 +83,7 @@ def get_ascii(message):
         ascii_.append(ord(message[i]))
     return ascii_
 
-
-values = get_phy_n()
-phy_n = values[0]
-n = values[1]
-e = get_e(phy_n)
-d = get_d(e, phy_n)
-
-# public key (n,e)
-# private ke (n,d)
-# msg = int(75)
-# print("message is : ", msg)
-# cry = int((msg ** e) % n)
-# print("message crypred is : ", cry)
-# decry = int((cry ** d) % n)
-# print("message decrypred is : ", decry)
-
-message = raw_input("Enter Your Message : ")
+# crypter the message
 
 
 def crypter(code_ascii, n, e):
@@ -98,18 +94,37 @@ def crypter(code_ascii, n, e):
     print("cryptage end")
     return crypted
 
+# decrypter the message
+
 
 def decrypter(crypt, n, d):
     decrypt = list()
+    output = str()
     for i in range(0, len(crypt)):
         decry = int((crypt[i] ** d) % n)
-        decrypt.append(chr(decry))
+        output += chr(decry)
     print("decryptage end")
-    return decrypt
+    return output
 
 
-ascii_ = get_ascii(message)
-crypt = crypter(ascii_, n, e)
+# variables
+values = get_phy_n()
+phy_n = values[0]
+n = values[1]
+e = get_e(phy_n)
+d = get_d(e, phy_n)
+
+# public key (n,e)
+# private ke (n,d)
+
+# get user input
+message = raw_input("Enter Your Message : ")
+
+
+# crypter the user input
+crypt = crypter(get_ascii(message), n, e)
+
+# decrypter the message
 decrypt = decrypter(crypt, n, d)
-for c in range(0, len(decrypt)):
-    print(decrypt[c])
+# show the message uncrypted
+print(decrypt)
