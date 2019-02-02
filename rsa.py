@@ -88,10 +88,12 @@ def get_ascii(message):
 
 def crypter(code_ascii, n, e):
     crypted = list()
+    message = str()
     for i in range(0, len(code_ascii)):
         cry = int((code_ascii[i] ** e) % n)
         crypted.append(cry)
-    print("cryptage end")
+        message += str(cry)
+    print("crypted message : " + message)
     return crypted
 
 # decrypter the message
@@ -103,8 +105,7 @@ def decrypter(crypt, n, d):
     for i in range(0, len(crypt)):
         decry = int((crypt[i] ** d) % n)
         output += chr(decry)
-    print("decryptage end")
-    return output
+    print("uncrypted message : " + output)
 
 
 # variables
@@ -125,6 +126,4 @@ message = raw_input("Enter Your Message : ")
 crypt = crypter(get_ascii(message), n, e)
 
 # decrypter the message
-decrypt = decrypter(crypt, n, d)
-# show the message uncrypted
-print(decrypt)
+decrypter(crypt, n, d)
