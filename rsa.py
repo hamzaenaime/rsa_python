@@ -29,7 +29,7 @@ def is_prime(n):
 
 def get_primes():
     primes = list()
-    for i in range(2, 100):
+    for i in range(2, 50):
         if is_prime(i):
             primes.append(i)
     return primes
