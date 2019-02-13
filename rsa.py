@@ -24,7 +24,7 @@ def is_prime(n):
     else:
         print("nombre invalide")
 
-# get all the prime numbers under 100
+# get all the prime numbers under 50
 
 
 def get_primes():
@@ -115,15 +115,16 @@ n = values[1]
 e = get_e(phy_n)
 d = get_d(e, phy_n)
 
+
 # public key (n,e)
 # private ke (n,d)
 
 # get user input
-message = raw_input("Enter Your Message : ")
+message = input("Enter Your Message : ")
 
 
 # crypter the user input
 crypt = crypter(get_ascii(message), n, e)
 
 # decrypter the message
-decrypter(crypt, n, d)
+decrypter(crypt,  n, d)
